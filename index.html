@@ -12,21 +12,21 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+       
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f5f9fc;
             color: #2c3e50;
             overflow: hidden;
         }
-        
+       
         .presentation-container {
             width: 100vw;
             height: 100vh;
             position: relative;
             overflow: hidden;
         }
-        
+       
         .slide {
             width: 100%;
             height: 100%;
@@ -42,12 +42,12 @@
             transform: scale(0.95);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        
+       
         .slide.active {
             opacity: 1;
             transform: scale(1);
         }
-        
+       
         .slide-title {
             font-size: 2.5rem;
             font-weight: 600;
@@ -55,10 +55,10 @@
             color: #3a86ff;
             text-align: center;
             opacity: 0;
-            animation: fadeIn 1s ease forwards;
+            animation: slideInFromTop 1s ease forwards;
             animation-delay: 0.3s;
         }
-        
+       
         .slide-content {
             display: flex;
             flex-direction: column;
@@ -67,22 +67,33 @@
             max-width: 800px;
             text-align: center;
         }
-        
+       
         .slide-text {
             font-size: 1.2rem;
             margin-bottom: 20px;
             opacity: 0;
-            animation: fadeIn 1s ease forwards;
+            animation: slideInFromLeft 1s ease forwards;
+        }
+       
+        .slide-text:nth-child(2) {
             animation-delay: 0.5s;
         }
-        
+       
+        .slide-text:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+       
+        .slide-text:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+       
         .slide-visual {
             margin: 30px 0;
             opacity: 0;
-            animation: zoomIn 1s ease forwards;
+            animation: bounceIn 1.2s ease forwards;
             animation-delay: 0.7s;
         }
-        
+       
         .navigation {
             position: absolute;
             bottom: 30px;
@@ -92,7 +103,7 @@
             gap: 20px;
             z-index: 100;
         }
-        
+       
         .nav-btn {
             background-color: #a8dadc;
             color: #1d3557;
@@ -106,21 +117,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
+       
         .nav-btn:hover {
             background-color: #457b9d;
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        
+       
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+       
         .slide-indicator {
             position: absolute;
             bottom: 100px;
             display: flex;
             gap: 10px;
         }
-        
+       
         .indicator {
             width: 12px;
             height: 12px;
@@ -128,13 +145,20 @@
             background-color: #a8dadc;
             opacity: 0.5;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
-        
+       
+        .indicator:hover {
+            opacity: 0.8;
+            transform: scale(1.2);
+        }
+       
         .indicator.active {
             opacity: 1;
             transform: scale(1.3);
+            background-color: #457b9d;
         }
-        
+       
         .code-block {
             background-color: rgba(255, 255, 255, 0.7);
             border-radius: 10px;
@@ -144,155 +168,109 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             opacity: 0;
-            animation: fadeIn 1s ease forwards;
+            animation: slideInFromRight 1s ease forwards;
             animation-delay: 0.9s;
         }
-        
+       
         .code-line {
             margin: 5px 0;
             opacity: 0;
             animation: fadeIn 0.5s ease forwards;
         }
-        
+       
         .venn-diagram {
             position: relative;
             width: 300px;
             height: 300px;
         }
-        
+       
         .circle {
             position: absolute;
             border-radius: 50%;
             opacity: 0.7;
+            transition: all 0.5s ease;
         }
-        
+       
         .circle-a {
             width: 200px;
             height: 200px;
             background-color: #a8dadc;
             top: 50px;
             left: 50px;
+            animation: pulse 2s infinite alternate;
         }
-        
+       
         .circle-b {
             width: 200px;
             height: 200px;
             background-color: #f1faee;
             top: 50px;
             left: 100px;
+            animation: pulse 2s infinite alternate 0.5s;
         }
-        
+       
         .element {
             position: absolute;
             font-weight: bold;
             color: #1d3557;
+            transition: all 0.3s ease;
         }
-        
-        .robot {
-            width: 200px;
+       
+        .element:hover {
+            transform: scale(1.2);
+            color: #3a86ff;
+        }
+       
+        .set-container {
+            position: relative;
+            width: 300px;
             height: 200px;
-            background-color: #a8dadc;
-            border-radius: 30px 30px 50px 50px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .robot-head {
-            width: 120px;
-            height: 100px;
-            background-color: #457b9d;
-            border-radius: 60px 60px 30px 30px;
-            position: relative;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding-top: 20px;
         }
-        
-        .robot-eye {
-            width: 30px;
-            height: 30px;
-            background-color: white;
-            border-radius: 50%;
-            position: relative;
-        }
-        
-        .robot-eye::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: #1d3557;
-            border-radius: 50%;
-            top: 7px;
-            left: 7px;
-        }
-        
-        .robot-body {
-            width: 140px;
-            height: 80px;
-            background-color: #457b9d;
-            border-radius: 20px;
-            margin-top: -10px;
+       
+        .set-box {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #457b9d;
+            border-radius: 10px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-        
-        .robot-arm {
-            position: absolute;
-            width: 30px;
-            height: 80px;
-            background-color: #457b9d;
-            border-radius: 15px;
+       
+        .set-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        
-        .robot-arm-left {
-            left: -20px;
-            transform: rotate(-20deg);
+       
+        .set-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #1d3557;
         }
-        
-        .robot-arm-right {
-            right: -20px;
-            transform: rotate(20deg);
+       
+        .set-elements {
+            font-size: 0.9rem;
         }
-        
-        .database-icon {
-            width: 200px;
-            height: 200px;
-            position: relative;
-        }
-        
-        .database-top {
-            width: 200px;
-            height: 40px;
-            background-color: #457b9d;
-            border-radius: 100px 100px 0 0;
-        }
-        
-        .database-middle {
-            width: 200px;
-            height: 120px;
-            background-color: #a8dadc;
-        }
-        
-        .database-bottom {
-            width: 200px;
-            height: 40px;
-            background-color: #457b9d;
-            border-radius: 0 0 100px 100px;
-        }
-        
+       
         .arrow {
             position: absolute;
-            width: 100px;
+            width: 80px;
             height: 2px;
             background-color: #1d3557;
+            top: 50px;
+            left: 110px;
+            opacity: 0;
+            animation: arrowGrow 1s ease forwards;
+            animation-delay: 1.2s;
         }
-        
+       
         .arrow::after {
             content: "";
             position: absolute;
@@ -304,47 +282,125 @@
             border-top: 5px solid transparent;
             border-bottom: 5px solid transparent;
         }
-        
+       
+        .transformation-label {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f1faee;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: 1.5s;
+        }
+       
+        .database-icon {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+       
+        .database-top {
+            width: 200px;
+            height: 40px;
+            background-color: #457b9d;
+            border-radius: 100px 100px 0 0;
+            animation: databasePulse 2s ease-in-out infinite;
+        }
+       
+        .database-middle {
+            width: 200px;
+            height: 120px;
+            background-color: #a8dadc;
+            animation: databasePulse 2s ease-in-out infinite 0.3s;
+        }
+       
+        .database-bottom {
+            width: 200px;
+            height: 40px;
+            background-color: #457b9d;
+            border-radius: 0 0 100px 100px;
+            animation: databasePulse 2s ease-in-out infinite 0.6s;
+        }
+       
+        .set-operation-arrow {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background-color: #1d3557;
+            opacity: 0;
+            animation: arrowGrow 1s ease forwards;
+        }
+       
+        .set-operation-arrow::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #1d3557;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+       
         .arrow-1 {
             top: 60px;
             left: 220px;
             transform: rotate(30deg);
+            animation-delay: 1.2s;
         }
-        
+       
         .arrow-2 {
             top: 100px;
             left: 220px;
+            animation-delay: 1.4s;
         }
-        
+       
         .arrow-3 {
             top: 140px;
             left: 220px;
             transform: rotate(-30deg);
+            animation-delay: 1.6s;
         }
-        
+       
         .set-operation {
             position: absolute;
             background-color: #f1faee;
             padding: 5px 10px;
             border-radius: 5px;
             font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            transition: all 0.3s ease;
         }
-        
+       
+        .set-operation:hover {
+            transform: scale(1.1);
+            background-color: #a8dadc;
+        }
+       
         .operation-1 {
             top: 40px;
             left: 330px;
+            animation-delay: 1.8s;
         }
-        
+       
         .operation-2 {
             top: 90px;
             left: 330px;
+            animation-delay: 2s;
         }
-        
+       
         .operation-3 {
             top: 140px;
             left: 330px;
+            animation-delay: 2.2s;
         }
-        
+       
         .banner {
             position: absolute;
             top: -50px;
@@ -356,8 +412,11 @@
             font-weight: bold;
             white-space: nowrap;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: bannerDrop 1s ease forwards;
+            animation-delay: 1.5s;
         }
-        
+       
         .banner::before, .banner::after {
             content: "";
             position: absolute;
@@ -365,19 +424,344 @@
             height: 20px;
             background-color: #f1faee;
         }
-        
+       
         .banner::before {
             left: -10px;
             top: 15px;
             transform: rotate(45deg);
         }
-        
+       
         .banner::after {
             right: -10px;
             top: 15px;
             transform: rotate(45deg);
         }
-        
+       
+        .icon-container {
+            display: flex;
+            justify-content: space-around;
+            width: 300px;
+            margin-top: 20px;
+        }
+       
+        .icon-box {
+            background-color: #a8dadc;
+            padding: 10px;
+            border-radius: 10px;
+            opacity: 0;
+            animation: iconPop 0.5s ease forwards;
+            transition: all 0.3s ease;
+        }
+       
+        .icon-box:nth-child(1) {
+            animation-delay: 1.5s;
+        }
+       
+        .icon-box:nth-child(2) {
+            animation-delay: 1.7s;
+        }
+       
+        .icon-box:nth-child(3) {
+            animation-delay: 1.9s;
+        }
+       
+        .icon-box:hover {
+            transform: translateY(-10px) scale(1.1);
+            background-color: #457b9d;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        .icon-box:nth-child(2) {
+            background-color: #f1faee;
+        }
+       
+        .icon-box:nth-child(2):hover {
+            background-color: #a8dadc;
+        }
+       
+        .data-structure {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+       
+        .hash-table {
+            width: 250px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 5px;
+            padding: 10px;
+        }
+       
+        .hash-cell {
+            background-color: #a8dadc;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #1d3557;
+            transition: all 0.3s ease;
+        }
+       
+        .hash-cell:hover {
+            background-color: #457b9d;
+            color: white;
+            transform: scale(1.1);
+        }
+       
+        .hash-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1d3557;
+        }
+       
+        .logic-gates {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+       
+        .gate-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 20px;
+        }
+       
+        .gate {
+            width: 60px;
+            height: 60px;
+            background-color: #a8dadc;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #1d3557;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+       
+        .gate:hover {
+            background-color: #457b9d;
+            color: white;
+            transform: scale(1.1);
+        }
+       
+        .gate-label {
+            position: absolute;
+            bottom: -20px;
+            font-size: 0.8rem;
+        }
+       
+        .gate-input {
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background-color: #1d3557;
+        }
+       
+        .gate-input-1 {
+            top: 20px;
+            left: -20px;
+        }
+       
+        .gate-input-2 {
+            top: 40px;
+            left: -20px;
+        }
+       
+        .gate-output {
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background-color: #1d3557;
+            top: 30px;
+            right: -20px;
+        }
+       
+        .conclusion-visual {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+       
+        .math-to-comp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+       
+        .math-set {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #457b9d;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+       
+        .comp-set {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #457b9d;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+       
+        .math-set:hover, .comp-set:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+       
+        .transform-arrow {
+            width: 60px;
+            height: 2px;
+            background-color: #1d3557;
+            margin: 0 20px;
+            position: relative;
+        }
+       
+        .transform-arrow::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #1d3557;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+       
+        /* Robot styles */
+        .robot {
+            width: 200px;
+            height: 200px;
+            background-color: #a8dadc;
+            border-radius: 30px 30px 50px 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: float 3s ease-in-out infinite;
+        }
+       
+        .robot-head {
+            width: 120px;
+            height: 100px;
+            background-color: #457b9d;
+            border-radius: 60px 60px 30px 30px;
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-top: 20px;
+            animation: headBob 2s ease-in-out infinite;
+        }
+       
+        .robot-eye {
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .robot-eye::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #1d3557;
+            border-radius: 50%;
+            top: 7px;
+            left: 7px;
+            animation: eyeMove 3s ease-in-out infinite;
+        }
+       
+        .robot-body {
+            width: 140px;
+            height: 80px;
+            background-color: #457b9d;
+            border-radius: 20px;
+            margin-top: -10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+       
+        .robot-arm {
+            position: absolute;
+            width: 30px;
+            height: 80px;
+            background-color: #457b9d;
+            border-radius: 15px;
+            transform-origin: top center;
+        }
+       
+        .robot-arm-left {
+            left: -20px;
+            animation: armWave 2s ease-in-out infinite;
+        }
+       
+        .robot-arm-right {
+            right: -20px;
+            animation: armWave 2s ease-in-out infinite 0.5s;
+        }
+       
+        /* Combined title slide styles */
+        .title-slide-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+        }
+       
+        .title-visual-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+       
+        .set-operations {
+            display: flex;
+            justify-content: space-around;
+            width: 300px;
+            margin-top: 20px;
+        }
+       
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -386,40 +770,258 @@
                 opacity: 1;
             }
         }
-        
-        @keyframes zoomIn {
+       
+        @keyframes slideInFromTop {
             from {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+       
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+       
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+       
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+       
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.05);
+            }
+        }
+       
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+       
+        @keyframes headBob {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+       
+        @keyframes eyeMove {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(5px);
+            }
+            75% {
+                transform: translateX(-5px);
+            }
+        }
+       
+        @keyframes armWave {
+            0%, 100% {
+                transform: rotate(-20deg);
+            }
+            50% {
+                transform: rotate(20deg);
+            }
+        }
+       
+        @keyframes databasePulse {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+       
+        @keyframes arrowGrow {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 100px;
+                opacity: 1;
+            }
+        }
+       
+        @keyframes bannerDrop {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+       
+        @keyframes iconPop {
+            from {
+                opacity: 0;
+                transform: scale(0);
             }
             to {
                 opacity: 1;
                 transform: scale(1);
             }
         }
-        
+       
         .title-slide {
             background-color: #e6f3ff;
         }
-        
+       
         .definition-slide {
             background-color: #e6fffa;
         }
-        
+       
         .data-structures-slide {
             background-color: #f0f9ff;
         }
-        
+       
         .database-slide {
             background-color: #e6f7ff;
         }
-        
+       
         .logic-ai-slide {
             background-color: #f0fff4;
         }
-        
+       
         .conclusion-slide {
             background-color: #f5f0ff;
+        }
+       
+        /* New animations for slide transitions */
+        .slide.slide-out-left {
+            animation: slideOutLeft 0.8s ease forwards;
+        }
+       
+        .slide.slide-out-right {
+            animation: slideOutRight 0.8s ease forwards;
+        }
+       
+        .slide.slide-in-left {
+            animation: slideInLeft 0.8s ease forwards;
+        }
+       
+        .slide.slide-in-right {
+            animation: slideInRight 0.8s ease forwards;
+        }
+       
+        @keyframes slideOutLeft {
+            to {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+       
+        @keyframes slideOutRight {
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+       
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+       
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+       
+        /* Particle effect for title slide */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+       
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(58, 134, 255, 0.5);
+            border-radius: 50%;
+            animation: floatUp 10s linear infinite;
+        }
+       
+        @keyframes floatUp {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -427,27 +1029,42 @@
     <div class="presentation-container">
         <!-- Slide 1: Title Slide -->
         <div class="slide title-slide active">
+            <div class="particles" id="particles"></div>
             <h1 class="slide-title">How Sets in Mathematics Are Used in Computers</h1>
-            <div class="slide-visual">
-                <div class="robot">
-                    <div class="robot-head">
-                        <div class="robot-eye"></div>
-                        <div class="robot-eye"></div>
+            <div class="title-slide-content">
+                <div class="title-visual-row">
+                    <div class="robot">
+                        <div class="robot-head">
+                            <div class="robot-eye"></div>
+                            <div class="robot-eye"></div>
+                        </div>
+                        <div class="robot-body">
+                            <i class="fas fa-laptop-code" style="font-size: 2rem; color: white;"></i>
+                        </div>
+                        <div class="robot-arm robot-arm-left"></div>
+                        <div class="robot-arm robot-arm-right"></div>
                     </div>
-                    <div class="robot-body">
-                        <i class="fas fa-laptop-code" style="font-size: 2rem; color: white;"></i>
+                    <div class="set-container">
+                        <div class="set-box">
+                            <div class="set-label">Math Set</div>
+                            <div class="set-elements">{1, 2, 2, 3}</div>
+                        </div>
+                        <div class="arrow"></div>
+                        <div class="set-box">
+                            <div class="set-label">Computer Set</div>
+                            <div class="set-elements">[1, 2, 3]</div>
+                        </div>
                     </div>
-                    <div class="robot-arm robot-arm-left"></div>
-                    <div class="robot-arm robot-arm-right"></div>
                 </div>
-                <div style="position: relative; width: 300px; height: 100px; margin-top: 20px;">
-                    <div class="element" style="top: 10px; left: 20px;">{1, 2, 3}</div>
-                    <div class="element" style="top: 40px; left: 100px;">{A, B, C}</div>
-                    <div class="element" style="top: 20px; left: 200px;">{x, y, z}</div>
+                <div class="transformation-label">Mathematical Concepts to Computer Implementation</div>
+                <div class="set-operations">
+                    <div class="element" style="animation-delay: 1.2s;">A ∪ B</div>
+                    <div class="element" style="animation-delay: 1.4s;">A ∩ B</div>
+                    <div class="element" style="animation-delay: 1.6s;">A - B</div>
                 </div>
             </div>
         </div>
-        
+       
         <!-- Slide 2: Mathematical Definition of Sets -->
         <div class="slide definition-slide">
             <h1 class="slide-title">Mathematical Definition of Sets</h1>
@@ -459,17 +1076,17 @@
                     <div class="venn-diagram">
                         <div class="circle circle-a"></div>
                         <div class="circle circle-b"></div>
-                        <div class="element" style="top: 70px; left: 80px;">1</div>
-                        <div class="element" style="top: 100px; left: 60px;">2</div>
-                        <div class="element" style="top: 130px; left: 80px;">3</div>
-                        <div class="element" style="top: 100px; left: 130px;">4</div>
-                        <div class="element" style="top: 70px; left: 160px;">5</div>
-                        <div class="element" style="top: 130px; left: 160px;">6</div>
+                        <div class="element" style="top: 70px; left: 80px; animation-delay: 1.2s;">1</div>
+                        <div class="element" style="top: 100px; left: 60px; animation-delay: 1.3s;">2</div>
+                        <div class="element" style="top: 130px; left: 80px; animation-delay: 1.4s;">3</div>
+                        <div class="element" style="top: 100px; left: 130px; animation-delay: 1.5s;">4</div>
+                        <div class="element" style="top: 70px; left: 160px; animation-delay: 1.6s;">5</div>
+                        <div class="element" style="top: 130px; left: 160px; animation-delay: 1.7s;">6</div>
                     </div>
                 </div>
             </div>
         </div>
-        
+       
         <!-- Slide 3: Use of Sets in Data Structures & Programming -->
         <div class="slide data-structures-slide">
             <h1 class="slide-title">Use of Sets in Data Structures & Programming</h1>
@@ -484,9 +1101,28 @@
                     <div class="code-line" style="animation-delay: 1.5s;">my_set.add(6)</div>
                     <div class="code-line" style="animation-delay: 1.7s;">print(my_set)  # {1, 2, 3, 4, 5, 6}</div>
                 </div>
+                <div class="slide-visual">
+                    <div class="data-structure">
+                        <div class="hash-label">HashSet Implementation</div>
+                        <div class="hash-table">
+                            <div class="hash-cell" style="animation-delay: 1.5s;">1</div>
+                            <div class="hash-cell" style="animation-delay: 1.6s;">2</div>
+                            <div class="hash-cell" style="animation-delay: 1.7s;">3</div>
+                            <div class="hash-cell" style="animation-delay: 1.8s;">4</div>
+                            <div class="hash-cell" style="animation-delay: 1.9s;">5</div>
+                            <div class="hash-cell" style="animation-delay: 2s;">6</div>
+                            <div class="hash-cell" style="animation-delay: 2.1s;">7</div>
+                            <div class="hash-cell" style="animation-delay: 2.2s;">8</div>
+                            <div class="hash-cell" style="animation-delay: 2.3s;">9</div>
+                            <div class="hash-cell" style="animation-delay: 2.4s;">10</div>
+                            <div class="hash-cell" style="animation-delay: 2.5s;">11</div>
+                            <div class="hash-cell" style="animation-delay: 2.6s;">12</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
+       
         <!-- Slide 4: Sets in Databases -->
         <div class="slide database-slide">
             <h1 class="slide-title">Sets in Databases</h1>
@@ -498,9 +1134,9 @@
                         <div class="database-top"></div>
                         <div class="database-middle"></div>
                         <div class="database-bottom"></div>
-                        <div class="arrow arrow-1"></div>
-                        <div class="arrow arrow-2"></div>
-                        <div class="arrow arrow-3"></div>
+                        <div class="set-operation-arrow arrow-1"></div>
+                        <div class="set-operation-arrow arrow-2"></div>
+                        <div class="set-operation-arrow arrow-3"></div>
                         <div class="set-operation operation-1">UNION</div>
                         <div class="set-operation operation-2">INTERSECT</div>
                         <div class="set-operation operation-3">EXCEPT</div>
@@ -508,7 +1144,7 @@
                 </div>
             </div>
         </div>
-        
+       
         <!-- Slide 5: Sets in Computer Logic & AI -->
         <div class="slide logic-ai-slide">
             <h1 class="slide-title">Sets in Computer Logic & AI</h1>
@@ -516,33 +1152,46 @@
                 <p class="slide-text">Logic circuits use set operations for decision-making.</p>
                 <p class="slide-text">In AI, sets help group features, filter data, and classify information.</p>
                 <div class="slide-visual">
-                    <div class="robot" style="position: relative;">
-                        <div class="robot-head">
-                            <div class="robot-eye"></div>
-                            <div class="robot-eye"></div>
+                    <div class="logic-gates">
+                        <div class="gate-container">
+                            <div class="gate" style="animation-delay: 1.2s;">
+                                AND
+                                <div class="gate-input gate-input-1"></div>
+                                <div class="gate-input gate-input-2"></div>
+                                <div class="gate-output"></div>
+                                <div class="gate-label">Intersection</div>
+                            </div>
+                            <div class="gate" style="animation-delay: 1.4s;">
+                                OR
+                                <div class="gate-input gate-input-1"></div>
+                                <div class="gate-input gate-input-2"></div>
+                                <div class="gate-output"></div>
+                                <div class="gate-label">Union</div>
+                            </div>
+                            <div class="gate" style="animation-delay: 1.6s;">
+                                NOT
+                                <div class="gate-input gate-input-1" style="top: 30px;"></div>
+                                <div class="gate-output"></div>
+                                <div class="gate-label">Complement</div>
+                            </div>
                         </div>
-                        <div class="robot-body">
-                            <i class="fas fa-brain" style="font-size: 2rem; color: white;"></i>
-                        </div>
-                        <div class="robot-arm robot-arm-left"></div>
-                        <div class="robot-arm robot-arm-right"></div>
-                        <div class="banner">Thanks to Set Theory!</div>
+                        <div class="banner">Set Theory in Logic Gates</div>
                     </div>
-                    <div style="display: flex; justify-content: space-around; width: 300px; margin-top: 20px;">
-                        <div style="background-color: #a8dadc; padding: 10px; border-radius: 10px;">
+                    <div class="icon-container">
+                        <div class="icon-box">
                             <i class="fas fa-filter" style="font-size: 1.5rem; color: #1d3557;"></i>
                         </div>
-                        <div style="background-color: #f1faee; padding: 10px; border-radius: 10px;">
+                        <div class="icon-box">
                             <i class="fas fa-object-group" style="font-size: 1.5rem; color: #1d3557;"></i>
                         </div>
-                        <div style="background-color: #a8dadc; padding: 10px; border-radius: 10px;">
+                        <div class="icon-box">
                             <i class="fas fa-tags" style="font-size: 1.5rem; color: #1d3557;"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+       
         <!-- Slide 6: Conclusion -->
         <div class="slide conclusion-slide">
             <h1 class="slide-title">Conclusion</h1>
@@ -550,28 +1199,30 @@
                 <p class="slide-text">Set theory gives computers a way to organize and compare data efficiently.</p>
                 <p class="slide-text">Without sets, database queries, logic, and algorithms would break!</p>
                 <div class="slide-visual">
-                    <div class="robot" style="position: relative;">
-                        <div class="robot-head">
-                            <div class="robot-eye"></div>
-                            <div class="robot-eye"></div>
+                    <div class="conclusion-visual">
+                        <div class="math-to-comp">
+                            <div class="math-set">
+                                <div class="set-label">Mathematics</div>
+                                <div class="set-elements">{a, b, c}</div>
+                            </div>
+                            <div class="transform-arrow"></div>
+                            <div class="comp-set">
+                                <div class="set-label">Computing</div>
+                                <div class="set-elements">[a, b, c]</div>
+                            </div>
                         </div>
-                        <div class="robot-body">
-                            <i class="fas fa-check" style="font-size: 2rem; color: white;"></i>
-                        </div>
-                        <div class="robot-arm robot-arm-left" style="transform: rotate(-45deg);"></div>
-                        <div class="robot-arm robot-arm-right" style="transform: rotate(45deg);"></div>
-                        <div class="banner">Thanks to Set Theory!</div>
+                        <div class="banner">Bridging Math and Computing</div>
                     </div>
                 </div>
             </div>
         </div>
-        
+       
         <!-- Navigation -->
         <div class="navigation">
             <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
             <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
         </div>
-        
+       
         <!-- Slide Indicators -->
         <div class="slide-indicator">
             <div class="indicator active" data-slide="0"></div>
@@ -590,46 +1241,82 @@
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             let currentSlide = 0;
-            
-            function showSlide(index) {
-                // Hide all slides
-                slides.forEach(slide => {
-                    slide.classList.remove('active');
-                });
-                
+            let isTransitioning = false;
+           
+            // Create particles for title slide
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                if (!particlesContainer) return;
+               
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 10 + 's';
+                    particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+           
+            createParticles();
+           
+            function showSlide(index, direction = 'right') {
+                if (isTransitioning) return;
+                isTransitioning = true;
+               
+                const currentSlideElement = slides[currentSlide];
+                const nextSlideElement = slides[index];
+               
+                // Set transition classes
+                if (direction === 'right') {
+                    currentSlideElement.classList.add('slide-out-left');
+                    nextSlideElement.classList.add('slide-in-right');
+                } else {
+                    currentSlideElement.classList.add('slide-out-right');
+                    nextSlideElement.classList.add('slide-in-left');
+                }
+               
                 // Update indicators
                 indicators.forEach(indicator => {
                     indicator.classList.remove('active');
                 });
-                
-                // Show current slide
-                slides[index].classList.add('active');
                 indicators[index].classList.add('active');
-                
-                // Reset animations for the current slide
-                const animatedElements = slides[index].querySelectorAll('.slide-title, .slide-text, .slide-visual, .code-line');
-                animatedElements.forEach(element => {
-                    const animation = element.style.animation;
-                    element.style.animation = 'none';
-                    element.offsetHeight; // Trigger reflow
-                    element.style.animation = animation;
-                });
+               
+                // After transition completes
+                setTimeout(() => {
+                    // Remove transition classes
+                    currentSlideElement.classList.remove('slide-out-left', 'slide-out-right', 'active');
+                    nextSlideElement.classList.remove('slide-in-right', 'slide-in-left');
+                    nextSlideElement.classList.add('active');
+                   
+                    // Reset animations for the new slide
+                    const animatedElements = nextSlideElement.querySelectorAll('.slide-title, .slide-text, .slide-visual, .code-line, .element, .arrow, .set-operation, .banner, .icon-box, .hash-cell, .gate');
+                    animatedElements.forEach(element => {
+                        const animation = element.style.animation;
+                        element.style.animation = 'none';
+                        element.offsetHeight; // Trigger reflow
+                        element.style.animation = animation;
+                    });
+                   
+                    currentSlide = index;
+                    isTransitioning = false;
+                }, 800);
             }
-            
+           
             function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
+                const newIndex = (currentSlide + 1) % slides.length;
+                showSlide(newIndex, 'right');
             }
-            
+           
             function prevSlide() {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
+                const newIndex = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(newIndex, 'left');
             }
-            
+           
             // Event listeners
             nextBtn.addEventListener('click', nextSlide);
             prevBtn.addEventListener('click', prevSlide);
-            
+           
             // Keyboard navigation
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'ArrowRight') {
@@ -638,15 +1325,17 @@
                     prevSlide();
                 }
             });
-            
+           
             // Indicator clicks
             indicators.forEach((indicator, index) => {
                 indicator.addEventListener('click', () => {
-                    currentSlide = index;
-                    showSlide(currentSlide);
+                    if (index !== currentSlide) {
+                        const direction = index > currentSlide ? 'right' : 'left';
+                        showSlide(index, direction);
+                    }
                 });
             });
-            
+           
             // Auto-advance slides (optional)
             // setInterval(nextSlide, 10000);
         });
